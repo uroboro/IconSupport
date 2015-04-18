@@ -386,6 +386,18 @@ static inline BOOL boolForKey(NSString *key, BOOL defaultValue) {
     return newState;
 }
 
+- (void)loadAllIcons {
+	%orig();
+	ISIconSupport *iconSupport = [ISIconSupport sharedInstance];
+	for (NSString *key in [iconSupport insertionIcons]) {
+		NSArray *icons = [[iconSupport insertionIcons] objectForKey:key];
+		for (id icon in icons) {
+			[self addIcon:icon];
+			[[%c(SBIconController) sharedInstance] addNewIconToDesignatedLocation:icon animate:YES scrollToList:NO saveIconState:YES]; 
+		}
+	}
+}
+
 %end
 
 //------------------------------------------------------------------------------

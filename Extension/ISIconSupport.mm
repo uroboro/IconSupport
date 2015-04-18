@@ -48,6 +48,17 @@ static ISIconSupport *sharedSupport = nil;
     return YES;
 }
 
+- (BOOL)addIcons:(NSArray *)icons forExtension:(NSString *)extension {
+	BOOL r = [self addExtension:extension];
+	NSMutableDictionary *dictionary = [self insertionIcons];
+	if (!dictionary) {
+		dictionary = [NSMutableDictionary new];
+		[self setInsertionIcons:dictionary];
+	}
+	[dictionary setObject:[icons copy] forKey:extension];
+	return r;
+}
+
 - (BOOL)isBeingUsedByExtensions {
     return ![[self extensionString] isEqualToString:@""];
 }

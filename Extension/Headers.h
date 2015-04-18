@@ -69,8 +69,12 @@
 - (void)activateAlertItem:(id)item;
 @end
 
+@interface SBIcon : NSObject
+@end
+
 @interface SBIconController : NSObject
 + (id)sharedInstance;
+- (void)addNewIconToDesignatedLocation:(SBIcon *)icon animate:(BOOL)animate scrollToList:(BOOL)scrollToList saveIconState:(BOOL)saveIconState;
 @end
 @interface SBIconController (Firmware_GTE_60)
 - (void)noteIconStateChangedExternally;
@@ -78,6 +82,7 @@
 
 @interface SBIconModel : NSObject
 - (id)iconState;
+- (void)addIcon:(SBIcon *)icon;
 @end
 @interface SBIconModel (Firmware_LT_40)
 @property(readonly, retain) SBButtonBar *buttonBar;
